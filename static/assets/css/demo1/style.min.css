@@ -26092,7 +26092,16 @@ div.tox .tox-dialog__body {
     margin: 0 0 0 .7em
 }
 
+/*.select-container {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*}*/
+
 .select-container {
-    display: flex;
-    justify-content: space-between;
+    display: flex; /* Use flexbox for a row layout */
+}
+
+.select-container select {
+    margin-right: 10px; /* Add some spacing between selects */
+     width: 200px;
 }
