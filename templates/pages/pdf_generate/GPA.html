@@ -1,0 +1,125 @@
+<!DOCTYPE  html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>file_1698038402921</title>
+    <style type="text/css"> * {
+        margin: 0;
+        padding: 0;
+        text-indent: 0;
+    }
+
+    h1 {
+        color: black;
+        font-family: Cambria, serif;
+        font-style: normal;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 12.5pt;
+    }
+
+    h2 {
+        color: black;
+        font-family: Cambria, serif;
+        font-style: normal;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 11pt;
+    }
+
+    p {
+        color: black;
+        font-family: Cambria, serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+        margin: 0pt;
+    }
+
+    .s1 {
+        color: black;
+        font-family: Cambria, serif;
+        font-style: normal;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 7.5pt;
+    }
+
+    .s2 {
+        color: black;
+        font-family: Cambria, serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 7.5pt;
+    }
+
+    table, tbody {
+        vertical-align: top;
+        overflow: visible;
+    }
+    </style>
+
+</head>
+
+
+<body>
+<h1 style="padding-top: 3pt;text-indent: 0pt;line-height: 118%;text-align: center;">Urganch
+    davlat universiteti Urgench state university</h1>
+<h2 style="text-indent: 0pt;text-align: center;">AKADEMIK MA’LUMOTNOMA</h2>
+<h2 style="text-indent: 0pt;text-align: center;">Transcript of Academic
+    Records</h2>
+
+<p style="padding-top: 4pt;padding-left: 6pt;text-indent: 0pt;line-height: 166%;text-align: left;">
+    Qayd raqami / Reg. Number: <b>________ </b><br>
+    Berilgan sanasi / Given date: <b>{{ given_date }} </b><br>
+    Ta’lim oluvchi F.I.Sh. / Full name:<b>___________________________________________</b>
+    <br>Tug‘ilgan sanasi / Date of birth: <b>_____________</b></p>
+<p style="padding-left: 6pt;text-indent: 0pt;text-align: left;">Akademik daraja / Academic degree: <b>Bakalavr /
+    Bachelor</b></p>
+<p style="padding-top: 8pt;padding-left: 6pt;text-indent: 0pt;text-align: left;">Fakultet / College:
+    <b>{{ fakultet }}</b></p>
+<p style="padding-top: 8pt;padding-left: 6pt;text-indent: 0pt;text-align: left;">Yo‘nalish / Major:
+    <b>{{ yonalish }}</b></p>
+<p style="padding-top: 8pt;padding-left: 6pt;text-indent: 0pt;text-align: left;">O‘qishga qabul qilingan yili / Date of
+    admission: <b>{{ qabul_yili }}</b></p>
+<p style="padding-top: 8pt;padding-left: 6pt;text-indent: 0pt;text-align: left;">Ta'lim shakli/ / Form of education:
+    <b>{{ talim_shakli }}</b></p>
+<p style="padding-top: 8pt;padding-left: 6pt;text-indent: 0pt;text-align: left;">Ta’lim oluvchining maqomi / Student
+    status: <b>Talaba / Student</b></p>
+
+<p style="text-indent: 0pt;text-align: left;"><br/></p>
+<p style="padding-top: 8pt;padding-left: 6pt;text-indent: 0pt;text-align: left;">GPA / Grade point average:
+    <b>{{ gpa }}</b></p>
+<p style="text-indent: 0pt;text-align: left;"><br/></p>
+
+<table style="width: 100%;" border="1" class="table table-bordered">
+    <thead style="background: #3b5998;">
+    <tr>
+        <th style="padding-top:5px;width: 5%">#</th>
+        <th style="padding-top:5px;width: 45%">Fan</th>
+        <th style="padding-top:5px;width: 30%">Block</th>
+        <th style="padding-top:5px;width: 10%">Kredit hajmi</th>
+        <th style="padding-top:5px;width: 10%">Baho</th>
+    </tr>
+    </thead>
+    <tbody id="table_body">
+    <tbody>
+    {% for i in subjects_info %}
+        <tr>
+            <th style="padding-top:5px; text-align: center" scope="row">{{ forloop.counter }}</th>
+            <td style="padding:5px 0px 0px 5px">{{ i.0 }}</td>
+            <td style="padding:5px 0px 0px 5px">{{ i.1 }}</td>
+            <td style="padding-top:5px; text-align: center">{{ i.3 }}</td>
+            <td style="padding-top:5px; text-align: center">{{ i.2 }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -31,7 +31,7 @@ $(document).ready(function () {
 
         // AJAX so'rovni yuborish
         $.ajax({
-            url: '/ajax_get_options/', // AJAX so'rovni qabul qiladigan Django view manzili
+            url: 'ajax_get_options/', // AJAX so'rovni qabul qiladigan Django view manzili
             data: {
                 'fakultet': fakultet,
                 'talim_shakli': talim_shakli,

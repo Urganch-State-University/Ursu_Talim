@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% extends "dashboard.html" %}
 {% load static %}
+{% load group_filter %}
 <html lang="en">
 
 
@@ -11,7 +12,7 @@
             <div class="page-content">
 
                 <nav class="page-breadcrumb">
-                    <form method="POST">
+                    <form id="mainform" method="POST" action="{% url 'showmainform' %}">
                         <div class="select-container">
 
                             {% csrf_token %}
@@ -62,7 +63,7 @@
 
 
                         </div>
-                        <button type="submit" class="btn btn-success mt-2 ms-1">Tekshirish</button>
+                        <button type="submit" name="table1" class="btn btn-success mt-2 ms-1">Tekshirish</button>
 
                     </form>
 
@@ -70,103 +71,66 @@
                 </nav>
 
 
-                <div class="row">
+                <div style="visibility:hidden" id="subject_div" class="row">
                     <div class="col-md-12 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <h6 class="card-title">Fanlar Ro'yhati</h6>
+                        {% block gpa %}
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">Fanlar Ro'yhati</h6>
 
-                                <p class="text-muted mb-3">Baholar tabelingizdagi baholarni fanlarga mos ravishta
-                                    kiriting</p>
+                                    <p class="text-muted mb-3">Baholar tabelingizdagi baholarni fanlarga mos ravishta
+                                        kiriting</p>
 
-                                <form method="POST">
-                                    <div class="table-responsive">
-                                        <table id="dataTableExample" class="table">
-                                            <thead>
-                                            <tr>
-                                                <th>№</th>
-                                                <th>Fan</th>
-                                                <th>Fan turi</th>
-                                                <th>Fan bloki</th>
-                                                <th>Fan soati</th>
-                                                <th>Kredit hajmi</th>
-                                                <th>Baho</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% if subjects_list %}
-                                                {#                                                {{ subjects_list }}#}
-
-                                                {% for j in subjects_list %}
-                                                    {% if j.0 == '' %}
-                                                        {% for i in j.1 %}
-                                                            <tr>
-                                                                <td>{{ forloop.counter }}</td>
-                                                                <td>{{ i.0 }}</td>
-                                                                <td>{{ i.2 }}</td>
-                                                                <td>{{ i.3 }}</td>
-                                                                <td>{{ i.4 }}</td>
-                                                                <td>{{ i.5 }}</td>
-                                                                <td>
-                                                                    <input type="number" class="form-control"
-                                                                           id="numberInput"
-                                                                           name="baho{{ forloop.counter }}" min="1"
-                                                                           max="5">
-                                                                </td>
-                                                            </tr>
-
-                                                        {% endfor %}
-
-                                                    {% else %}
-
-                                                        <tr>
-                                                            <td>{{ forloop.counter }}</td>
-                                                        <td>
-                                                            {% for i in j.1 %}
-                                                                {{ i.0 }}<br>
-                                                            {% endfor %}
-                                                        </td>
-                                                            <td>{{ j.1.2.2 }}</td>
-                                                            <td>{{ j.1.2.3 }}</td>
-                                                            <td>{{ j.1.2.4 }}</td>
-                                                            <td>{{ j.1.2.5 }}</td>
-                                                            <td>
-                                                                <input type="number" class="form-control"
-                                                                       id="numberInput"
-                                                                       name="baho{{ forloop.counter }}" min="1" max="5">
-                                                            </td>
-                                                        </tr>
-
-                                                    {% endif %}
+                                    <form id="subject_table" method="POST" action="{% url 'showgpa' %}">
+                                        {% csrf_token %}
+                                        <div class="table-responsive">
+                                            <table id="dataTableExample" class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>№</th>
+                                                    <th>Fan</th>
+                                                    <th>Fan turi</th>
+                                                    <th>Fan bloki</th>
+                                                    <th>Semester</th>
+                                                    <th>Fan soati</th>
+                                                    <th>Kredit hajmi</th>
+                                                    <th>Baho</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="table_body">
 
 
-                                                {% endfor %}
-                                            {% endif %}
-                                            </tbody>
-                                        </table>
-                                    </div>
 
-                                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
-                                </form>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <button type="submit" id="submit_gpa" name="submit_gpa"
+                                                class="btn btn-primary mt-2">GPA ni Tekshirish
+                                        </button>
+                                        <button type="submit" id="download_gpa" name="download_gpa"
+                                                class="btn btn-primary btn-icon-text mt-2 mb-md-0">
+                                            <i class="btn-icon-prepend" data-feather="download-cloud"></i>
+                                            Yuklab olish
+                                        </button>
+                                    </form>
+
+
+                                </div>
                             </div>
-                        </div>
+                        {% endblock gpa %}
                     </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-                    <div class="mb-3 mb-md-0">
+                <div style="visibility:hidden" id="gpa_result" class="card">
+                    <div class="card-body">
 
-                    </div>
-                    <div class="d-flex align-items-center flex-wrap text-nowrap">
-                        <button type="button" class="btn btn-outline-primary btn-icon-text me-2 mb-2 mb-md-0">
-                            <i class="btn-icon-prepend" data-feather="printer"></i>
-                            Print
-                        </button>
-                        <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
-                            <i class="btn-icon-prepend" data-feather="download-cloud"></i>
-                            Download Report
-                        </button>
+                        <p id="status" class="card-text"></p>
+                        <p id="gpa" class="card-text"></p>
+                        <div id="subjectTable"></div>
+                        <p id="kredit" class="card-text"></p>
                     </div>
                 </div>
+
 
             </div>
         {% endblock content %}
