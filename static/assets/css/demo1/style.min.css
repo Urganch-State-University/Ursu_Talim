@@ -26102,8 +26102,8 @@ div.tox .tox-dialog__body {
 }
 
 .select-container select {
-    margin-right: 10px; /* Add some spacing between selects */
-    width: 200px;
+    /*margin-right: 10px;*/
+    /*width: 200px;*/
 }
 
 /*.table td {*/

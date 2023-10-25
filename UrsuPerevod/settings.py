@@ -39,9 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #apps
+    # added
+    'crispy_forms',
+
+    # apps
     'home',
     'transfers',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -107,6 +111,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CRISPY_TEMPLATE_PACK = 'login'
+
+
+# LOGIN
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL='login'
+
+LOGIN_URL='login'
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -125,10 +138,10 @@ APPEND_SLASH = False
 MEDIA_URL = 'media/'
 STATIC_URL = 'static/'
 if DEBUG:
-    STATICFILES_DIRS = str(BASE_DIR / 'static'),
+    STATICFILES_DIRS = str(BASE_DIR / 'static/'),
 
 else:
-    STATIC_ROOT = str(BASE_DIR / 'static')
+    STATIC_ROOT = str(BASE_DIR / 'static/')
 MEDIA_ROOT = str(BASE_DIR / 'media/')
 
 # Default primary key field type

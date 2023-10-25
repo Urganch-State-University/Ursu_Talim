@@ -99,22 +99,27 @@
     <thead style="background: #3b5998;">
     <tr>
         <th style="padding-top:5px;width: 5%">#</th>
-        <th style="padding-top:5px;width: 45%">Fan</th>
-        <th style="padding-top:5px;width: 30%">Block</th>
+        <th style="padding-top:5px;width: 45%">Fanlar</th>
+        <th style="padding-top:5px;width: 30%">Fanlar bloki</th>
         <th style="padding-top:5px;width: 10%">Kredit hajmi</th>
         <th style="padding-top:5px;width: 10%">Baho</th>
     </tr>
     </thead>
     <tbody id="table_body">
     <tbody>
-    {% for i in subjects_info %}
-        <tr>
-            <th style="padding-top:5px; text-align: center" scope="row">{{ forloop.counter }}</th>
-            <td style="padding:5px 0px 0px 5px">{{ i.0 }}</td>
-            <td style="padding:5px 0px 0px 5px">{{ i.1 }}</td>
-            <td style="padding-top:5px; text-align: center">{{ i.3 }}</td>
-            <td style="padding-top:5px; text-align: center">{{ i.2 }}</td>
-        </tr>
+    {% for j in semestr_types_list %}
+        <td colspan="5" style=" text-align: center; padding:5px 0px 0px 5px"><b>{{ j }}-semester</b></td>
+        {% for i in subjects_info %}
+            {% if j == i.4 %}
+            <tr>
+                <th style="padding-top:5px; text-align: center" scope="row">{{ forloop.counter }}</th>
+                <td style="padding:5px 0px 0px 5px">{{ i.0 }}</td>
+                <td style="padding:5px 0px 0px 5px">{{ i.1 }}</td>
+                <td style="padding-top:5px; text-align: center">{{ i.3 }}</td>
+                <td style="padding-top:5px; text-align: center">{{ i.2 }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
     {% endfor %}
     </tbody>
 

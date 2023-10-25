@@ -9,18 +9,7 @@
     var navbar = $('.navbar').not('.top-navbar');
     
 
-    // For Buy Now button. 
-    $("body").prepend('\
-      <div class="buy-now-wrapper">\
-        <a href="https://www.nobleui.com/html/documentation/docs.html" target="_blank" class="btn btn-primary text-white fw-bolder btn-icon-text">\
-          <i data-feather="file-text"></i>\
-        </a>\
-        <a href="https://1.envato.market/nobleui_admin" target="_blank" class="btn btn-danger text-white fw-bolder btn-icon-text">\
-        <i class="btn-icon-prepend" data-feather="shopping-cart"></i>\
-        Buy Now\
-      </a>\
-      </div>\
-    ');
+    // For Buy Now button.
 
 
     // Enable feather-icons with SVG markup

@@ -10,6 +10,8 @@ from django.views import View
 from xhtml2pdf import pisa
 from django.http import HttpResponse
 from django.template.loader import get_template
+from django.contrib.auth.decorators import login_required
+
 
 def showgpaview(request):
     if request.method == "POST":
@@ -19,11 +21,8 @@ def showgpaview(request):
             baho_list: list = request.POST.getlist('grade[]')
             name_list: list = request.POST.getlist('subject_name[]')
 
-
             semestr_list: list = request.POST.getlist('semestr[]')
             block_list: list = request.POST.getlist('block[]')
-
-
 
             kredit_list = list(map(float, kredit_list))
             baho_list = [float('2') if item in ['', '0', '1'] else float(item) for item in baho_list]
@@ -107,6 +106,7 @@ def showmainformview(request):
     return JsonResponse({})
 
 
+@login_required()
 def transfersview(request):
     with connection.cursor() as cursor:
         cursor.execute(""" SELECT * FROM e_department WHERE "_structure_type"='11' AND "id" NOT IN (77, 8, 7, 6);""")
@@ -188,18 +188,23 @@ class DownloadPDF(View):
         subject_list = []
         kredit_summa_r = 0
         for i in range(len(baho_list)):
-            if baho_list[i] == 2:
-                subject_list.append((name_list[i],block_list[i],baho_list[i], kredit_list[i]))
-                kredit_summa_r += kredit_list[i]
+            subject_list.append((name_list[i], block_list[i], baho_list[i], kredit_list[i], semestr_list[i]))
+            kredit_summa_r += kredit_list[i]
 
         # subjects_info = [(name_list[i], kredit_list[i], baho_list[i]) for i in range(len(baho_list))]
+
+        semestr_types_list = []
+        for i in semestr_list:
+            if i not in semestr_types_list:
+                semestr_types_list.append(i)
 
         current_date = datetime.datetime.now()
         context = {
             "given_date": current_date.strftime('%d.%m.%Y'),
             "subjects_info": subject_list,
-            "semestr_list":semestr_list,
-            "block_list":block_list,
+            "semestr_list": semestr_list,
+            "semestr_types_list": semestr_types_list,
+            "block_list": block_list,
             "fakultet": request.POST.get('fakultet'),
             "talim_shakli": request.POST.get('talim_shakli'),
             "qabul_yili": request.POST.get('qabul_yili'),
