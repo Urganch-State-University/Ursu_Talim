@@ -85,12 +85,16 @@ WSGI_APPLICATION = 'UrsuPerevod.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hemis',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
         'PORT': '5432',
-    }
+        'OPTIONS': {
+            'options': '-c search_path=academic,public'
+        }
+    },
+
 }
 
 # Password validation
@@ -113,12 +117,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CRISPY_TEMPLATE_PACK = 'login'
 
-
 # LOGIN
 LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL='login'
+LOGOUT_REDIRECT_URL = 'login'
 
-LOGIN_URL='login'
+LOGIN_URL = 'login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
